@@ -2,7 +2,6 @@ import newsRouter from './news.js';
 import siteRouter from './site.js';
 
 function route(app) {
-
     app.use('/news', newsRouter);
     // app.get('/news', (req, res) => {
     //   res.render('news');
