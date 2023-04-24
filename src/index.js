@@ -3,6 +3,10 @@ import morgan from 'morgan';
 import { engine } from 'express-handlebars';
 
 import route from './routes/index.js';
+import db from './config/db/index.js';
+
+// Connect to DB
+db.connect();
 
 const app = express();
 app.use(express.static('./src/public'));
@@ -15,7 +19,7 @@ app.use(
 app.use(express.json());
 
 //HTTP logger
-// app.use(morgan('combined'));
+app.use(morgan('combined'));
 
 //Template engine
 // Configuaration and default set handlebars => hbs
