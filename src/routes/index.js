@@ -1,4 +1,5 @@
 import newsRouter from './news.js';
+import meRouter from './me.js';
 import coursesRouter from './courses.js';
 import siteRouter from './site.js';
 
@@ -7,6 +8,8 @@ function route(app) {
     // app.get('/news', (req, res) => {
     //   res.render('news');
     // });
+
+    app.use('/me', meRouter);
     app.use('/courses', coursesRouter);
 
     app.use('/', siteRouter);
