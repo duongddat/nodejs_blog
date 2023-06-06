@@ -12,4 +12,15 @@ export default class MeControllers {
             )
             .catch(next);
     }
+
+    //[GET] /me/trash/courses
+    trashCourses(req, res, next) {
+        Course.findDeleted({})
+            .then((courses) =>
+                res.render('me/trashCourses', {
+                    courses: mutipleMongooesToObject(courses),
+                }),
+            )
+            .catch(next);
+    }
 }
