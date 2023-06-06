@@ -4,13 +4,29 @@ import { mutipleMongooesToObject } from '../../util/mongoose.js';
 export default class MeControllers {
     //[GET] /me/stored/courses
     storedCourses(req, res, next) {
-        Course.find({})
-            .then((courses) =>
+        // Cách viết này giống như việc thực hiện đồng thời 2 promises
+        Promise.all([Course.find({}), Course.countDocumentsDeleted()])
+            .then(([courses, deletedCount]) =>
                 res.render('me/storedCourses', {
+                    deletedCount,
                     courses: mutipleMongooesToObject(courses),
                 }),
             )
             .catch(next);
+
+        // Course.countDocumentsDeleted()
+        //     .then((deleteCount) => {
+        //         console.log(deleteCount)
+        //     })
+        //     .catch(() => {});
+
+        // Course.find({})
+        //     .then((courses) =>
+        //         res.render('me/storedCourses', {
+        //             courses: mutipleMongooesToObject(courses),
+        //         }),
+        //     )
+        //     .catch(next);
     }
 
     //[GET] /me/trash/courses
