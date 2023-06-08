@@ -132,7 +132,7 @@
         });
 
         //Check all submit button click
-        checkAllSubmitBtn.on('submit' ,function(e) {
+        checkAllSubmitBtn.click('submit' ,function(e) {
           var isSubmitable = !$(this).hasClass('disabled');
           if(!isSubmitable) {
             e.preventDefault();
