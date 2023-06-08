@@ -86,4 +86,22 @@ export default class CourseController {
                 res.json({ message: 'Action is invalid!' });
         }
     }
+
+    //[POST] /course/handle-form-actions
+    handleCoreActions(req, res, next) {
+        switch (req.body.action) {
+            case 'restore':
+                Course.restore({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            case 'delete':
+                Course.deleteOne({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: 'Action is invalid!' });
+        }
+    }
 }
